@@ -1,0 +1,198 @@
+
+$red: #760209;
+
+/* Mixins */
+@mixin spin {
+  @keyframes spin
+  {
+    from { background-position: 0, 0 0; }
+    to { background-position: 0, 0 -1580px; }
+  }
+}
+@mixin animate($name, $duration: 2.5s, $timing: linear, $delay: 0s, $iteration: infinite) {
+  animation: $name $duration $timing $delay $iteration;
+}
+@mixin animateNone {
+  animation: none;
+}
+@mixin linearGradient($values...) {
+  background-image: linear-gradient($values);
+}
+@mixin linearGradientUrl($gradient, $url) {
+  background-image: linear-gradient($gradient), $url;
+}
+@mixin transition($property: all, $duration: .3s, $timing: ease-in-out, $delay: 0s) {
+  transition: $property $duration $timing $delay;
+}
+@mixin twoLinearGradients($first, $second) {
+  background-image: linear-gradient($first), linear-gradient($second);
+}
+@mixin radialGradient($values...) {
+  background-image: radial-gradient($values);
+}
+@mixin rotate($values...) {
+  transform: rotate($values);
+}
+@mixin origin($values...) {
+  transform-origin: $values;
+}
+@mixin boxSizing ($value: border-box) {
+  box-sizing: $value;
+}
+@mixin transform($values...) {
+  transform: $values;
+}
+
+@include spin;
+
+.box-slot {
+  position: relative;
+}
+
+.jumbotron {
+  margin-top: 80px;
+}
+
+.equation {
+  position: absolute;
+  left: 50%;
+  margin-left: -50px;
+  top: 50%;
+  margin-top: -80px;
+  span {
+    display: inline-block;
+    vertical-align: middle;
+    margin-right: 12px;
+  }
+  .spinner {
+    height: 140px;
+    margin: 0 10px;
+    margin-right: 12px;
+    background-color: #FFF;
+    background-position: 0;
+    border-radius: 5px;
+    border: 6px solid #444;
+    box-shadow: inset 0 0 5px #000;
+    position: relative;
+    @include animate(spin, $duration: 3s, $timing: linear);
+    &:before {
+      content: '';
+      position: absolute;
+      z-index: -1;
+      top: -10px;
+      left: -10px;
+      width: 120px;
+      height: 160px;
+      border-radius: 10px;
+      box-shadow: inset 2px 2px 2px hsla(0,0%,100%,.2);
+    }
+  }
+  .pane-wrap {
+    height: 140px;
+    overflow: hidden;
+  }
+  .pane {
+    position: absolute;
+    background: none;
+    width: 80px;
+    &:before {
+      width: 100px;
+    }
+  }
+  .pane.xlg {
+    width: 250px;
+    &:before {
+      width: 270px;
+    }
+  }
+  .pane.lg {
+    width: 200px;
+    &:before {
+      width: 220px;
+    }
+  }
+  .pane-list {
+    font-size: 20px;
+    > li {
+      padding-left: 20px;
+      line-height: 140px;
+      height: 140px;
+    }
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+  }
+  &.done {
+    .spinner {
+      @include animateNone;
+      @include transition($property: background-position, $duration: 2s, $timing: ease-out);
+    }
+  }
+}
+.shoulder {
+  position: absolute;
+  top: 30px;
+  left: -100px;
+  width: 80px;
+  height: 100px;
+  border-radius: 10px;
+  background-color: #333;
+  @include linearGradient(#666 0%, #333 60%, #666 100%);
+  box-shadow: inset 2px 2px 2px hsla(0,0%,100%,.2);
+}
+.arm {
+  //*** BASE ***//
+  position: relative;
+  top: 10px;
+  left: 10px;
+  cursor: pointer;
+  width: 60px;
+  height: 80px;
+  border-radius: 10% / 50%;
+  background-color: #666;
+  @include twoLinearGradients((left, hsla(0,0%,0%,.3) 0%, hsla(0,0%,0%,0) 15%, hsla(0,0%,100%,0) 50%, hsla(0,0%,0%,0) 85%, hsla(0,0%,0%,.3)),(top, #333 0%, #666 10%, #999 30%, hsla(0,0%,100%,.8) 60%, #999 70%, #666 90%, #333 100%));
+  &:before {
+    //*** POLE ***//
+    content: '';
+    position: absolute;
+    top: -40px;
+    left: 16px;
+    width: 16px;
+    height: 70px;
+    border-radius: 8px;
+    box-shadow: 0px 2px 0px #333;
+    background-color: #999;
+    @include rotate(-10deg);
+    @include linearGradient(left, #666 0%, hsla(0,0%,100%,.7) 50%, #666 100%);
+    background-image: linear-gradient(to right, #666 0%, hsla(0,0%,100%,.7) 50%, #666 100%);
+    @include transition($duration:.5s);
+  }
+  &:after {
+    //*** BALL ***//
+    content: '';
+    position: absolute;
+    top: -70px;
+    left: -4px;
+    width: 40px;
+    height: 40px;
+    border-radius: 100%;
+    background-color: $red;
+    border: 2px solid darken($red, 5%);
+    @include boxSizing;
+    @include radialGradient(50% 40%, closest-corner, hsla(0,0,100%,.5), hsla(0,0%,100%,0));
+    @include transition($duration:.5s);
+  }
+}
+.arm.clicked {
+  &:before {
+    top: -20px;
+    left: 20px;
+    @include transform(rotate3d(100,10,0,180deg));
+    @include origin(0% 100%);
+    @include transition($duration:.5s);
+  }
+  &:after {
+    top: 90px;
+    @include transition($duration:.5s);
+  }
+}

@@ -1,0 +1,169 @@
+
+.pumpkin, #hitarea {
+  position: absolute;
+  right: 0; bottom: 30px; left: 0;
+  margin: auto;
+  transform: translateZ(0);
+}
+
+input { display: none; }
+
+/* eyes */
+.eye {
+  position:absolute;
+  width:78px;
+  height:78px;
+  background: #421c00;
+  border-radius:50% 50%;
+  left:180px;
+  top: 162px;
+  transition: all .1s ease;
+  box-shadow: 6px 6px 0 3px #db5b00 inset;
+}
+
+.trick .pupil {
+  background: #f00;
+}
+
+.eye:hover { cursor: pointer }
+.eye+.eye{
+  top: 162px;
+  left: 295px;
+  width:78px;
+  height:78px;
+}
+
+#anEye:checked ~ .mouth {
+  height:60px;
+  transform-origin: 0;
+  border-radius:10% 10% 40% 75%;
+}
+
+.mouth{
+  background: #421c00;
+  position:absolute;
+  width:230px;
+  height:75px;
+  border-radius: 70% 100% 10% 10%;
+  left: 170px;
+  top: 260px;
+  box-shadow: 10px 10px 0 0 #db5b00  inset;
+  transition: all .3s linear;
+}
+
+.tooth {
+  width: 35px;
+  height: 25px;
+  background: #b64d00;
+  position: absolute;
+  top: 0px;
+  left: 50px;
+  box-shadow: 1px 1px 0 0 #db5b00, 2px 2px 0 0 #db5b00,3px 3px 0 0 #db5b00, 4px 4px 0 0 #db5b00, 5px 5px 0 0 #db5b00;
+}
+
+.pupil{
+  position:relative;
+  width:30px;
+  height:30px;
+  background: black;
+  display: block;
+  border-radius: 50%;
+  left:50%;
+  top:50%;
+  margin:-12px 0 0 -12px;
+  transition: all .5s ease;
+}
+
+#anEye:checked ~ .message {
+  opacity: 1;
+}
+.message {
+  color: white;
+  position: absolute;
+  text-align:center;
+  font-size: 50px;
+  width: 100%;
+  font-family: garamond;
+  opacity: 0;
+  transition: all 1s ease;
+}
+
+/* hover events */
+
+#hitarea { width:600px; height:400px; }
+
+.hitbox{
+    width:150px;
+    height:130px;
+    float:left;
+    box-sizing: border-box;
+}
+
+/* idea "borrowed" from my friend Loktar http://codepen.io/loktar00/pen/FmkAd */
+#a-1:hover ~ .eye > .pupil{ transform: rotate(60deg) translate(-12px); }
+
+#a-2:hover ~ .eye > .pupil{ transform: rotate(80deg) translate(-14px); }
+
+#a-3:hover ~ .eye > .pupil{ transform: rotate(90deg) translateX(-14px) translateY(-16px); }
+
+#a-4:hover ~ .eye > .pupil{ transform: rotate(100deg) translateX(-14px) translateY(-18px); }
+
+#b-1:hover ~ .eye > .pupil{ transform: rotate(50deg) translateX(-13px) translateY(14px); }
+
+#b-2:hover ~ .eye > .pupil{ transform: rotate(0deg) translateX(0) translateY(0); }
+
+#b-3:hover ~ .eye > .pupil{ transform: rotate(100deg) translateX(-10px) translateY(-12px); }
+
+#b-4:hover ~ .eye > .pupil{ transform: rotate(110deg) translateX(-10px) translateY(-20px); }
+
+#c-1:hover ~ .eye > .pupil{ transform: rotate(50deg) translateX(0px) translateY(20px); }
+
+#c-2:hover ~ .eye > .pupil{ transform: rotate(0deg) translateX(0px) translateY(20px); }
+
+#c-3:hover ~ .eye > .pupil{ transform: rotate(0deg) translateX(10px) translateY(18px); }
+
+#c-4:hover ~ .eye > .pupil{ transform: rotate(0deg) translateX(15px) translateY(13px); }
+
+.pumpkin {
+  width: 360px;
+  height: 280px;
+  border-radius: 220px / 240px;
+  background-color: #b64d00;
+  /*background-image: radial-gradient(ellipse at 300px 10px, rgba(255,255,255,0.3) 0%, rgba(255,255,255,0.1) 100%);*/
+}
+
+.pumpkin:before,
+.pumpkin:after {
+  content: '';
+  position: absolute;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 180px / 240px;
+}
+
+.pumpkin:before {
+  left: 18%;
+  border-left: 3px solid rgba(0,0,0,0.1)
+}
+
+.pumpkin:after {
+  right: 18%;
+  border-right: 3px solid rgba(0,0,0,0.1)
+}
+
+.pumpkin-stem {
+  position: absolute;
+  top: -34px;
+  left: 160px;
+  height: 40px;
+  width: 40px;
+  background-color: #194d14;
+  border-bottom-left-radius: 3px;
+  border-bottom-right-radius: 3px;
+  border-top-left-radius: 23px;
+  border-top-right-radius: 10px;
+  /*background-image: linear-gradient(to right, rgba(0,0,0,0.3) 0%, rgba(0,0,0,.1) 58%, rgba(0,0,0,.1) 62%, rgba(0,0,0,0.3) 100%);*/
+}
+
+@keyframes fadeIn { 100% { opacity: 1 } }

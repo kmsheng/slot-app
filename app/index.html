@@ -1,0 +1,99 @@
+<!doctype html>
+<html class="no-js" ng-app="slotApp">
+  <head>
+    <meta charset="utf-8">
+    <title>frontend</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width">
+    <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+    <!-- build:css({.tmp,app}) styles/app.css -->
+    <link rel="stylesheet" href="styles/app.css">
+    <!-- endbuild -->
+
+    <!-- build:js scripts/modernizr.js -->
+    <script src="bower_components/modernizr/modernizr.js"></script>
+    <!-- endbuild -->
+  </head>
+  <body>
+    <!--[if lt IE 10]>
+      <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+    <![endif]-->
+
+    <div ui-view></div>
+
+    <!-- build:js scripts/vendor.js -->
+    <!-- bower:js -->
+    <script src="bower_components/jquery/dist/jquery.js"></script>
+    <script src="bower_components/angular/angular.js"></script>
+    <script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
+    <script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
+    <!-- endbower -->
+    <!-- endbuild -->
+
+    <!-- build:js({app,.tmp}) scripts/main.js -->
+    <script src="app.js"></script>
+    <script src="main/main.js"></script>
+    <script src="main/main.controller.js"></script>
+    <script src="about/about.js"></script>
+    <script src="about/about.controller.js"></script>
+    <script src="components/pumpkin/pumpkin.directive.js"></script>
+    <script src="components/slot/slot.directive.js"></script>
+    <script src="components/slot/slot.constant.js"></script>
+    <script src="components/trick/trick.service.js"></script>
+    <!-- inject:partials -->
+    <script id="angular-slot.html" type="text/ng-template">
+      <div class="box-slot">
+        <div class="equation done">
+
+          <div class="pane-wrap">
+            <div class="pane spinner" ng-class="[paneSize]"></div>
+            <ul class="pane-list">
+              <li ng-repeat="row in rows track by $index">{{row.text}}</li>
+            </ul>
+          </div>
+
+          <div class="shoulder"><div class="arm"></div></div>
+        </div>
+      </div>
+    </script>
+    <script id="pumpkin.html" type="text/ng-template">
+      <div>
+        <div class="pumpkin">
+          <div class="pumpkin-stem"></div>
+        </div>
+
+        <div id="hitarea" ng-class="{'trick': isTricking()}">
+            <div id="a-1" class="hitbox"></div>
+            <div id="a-2" class="hitbox"></div>
+            <div id="a-3" class="hitbox"></div>
+            <div id="a-4" class="hitbox"></div>
+            <div id="b-1" class="hitbox"></div>
+            <div id="b-2" class="hitbox"></div>
+            <div id="b-3" class="hitbox"></div>
+            <div id="b-4" class="hitbox"></div>
+            <div id="c-1" class="hitbox"></div>
+            <div id="c-2" class="hitbox"></div>
+            <div id="c-3" class="hitbox"></div>
+            <div id="c-4" class="hitbox"></div>
+
+            <label class="eye" for="anEye">
+              <div for="pupil1" class="pupil" ></div>
+            </label>
+
+            <label class="eye" for="anEye">
+              <div class="pupil"></div>
+            </label>
+            <input id="anEye" type="radio" name="eyes"/>
+            <div class="mouth">
+              <div class="tooth"></div>
+            </div>
+        </div>
+      </div>
+    </script>
+    <!-- endinject -->
+    <!-- endbuild -->
+
+  </body>
+</html>
